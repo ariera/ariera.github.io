@@ -1,0 +1,37 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 70px;
+}
+
+
+.post-content {
+  h2 {
+    font-size: 32px;
+    code {
+      font-size: 32px;
+    }
+  }
+
+  h3 {
+    font-size: 26px;
+    code {
+      font-size: 26px;
+    }
+  }
+
+  h4 {
+    font-size: 20px;
+    code {
+      font-size: 20px;
+    }
+  }
+}
+
+pre,
+code {
+  background-color: #f9f9ff;
+}
