@@ -2,7 +2,6 @@
 layout: post
 title:  "Using Postgre's UUIDs in Laravel and Eloquent"
 date:   2017-03-1 19:06:56 +0100
-categories: laravel postgres
 ---
 
 One of the things I love from postgres is the ability use **UUIDs as primary keys**. [Tom Harrison Jr. wrote recently a summary worth reading about the pros and cons of this approach](https://tomharrisonjr.com/uuid-or-guid-as-primary-keys-be-careful-7b2aa3dcb439#.poi02at77). For me the pros outweight the cons, but that's something you may have to decide by your own and on a project basis.
