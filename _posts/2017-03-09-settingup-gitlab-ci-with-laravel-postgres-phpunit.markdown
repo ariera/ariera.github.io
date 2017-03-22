@@ -156,7 +156,7 @@ This file may be optional depending on your local configuration. If your normal 
 ## Summary
 GitLab's continuous integration system can be a blessing once is properly configured, but it can get a bit confusing if you trail off of the usual path and all you hear is *docker image configuration linking* and you've never worked with it before. Hopefully you'll find this small guide useful
 &nbsp;
-#### .gitlab-ci.yml
+<div class="file-title">.gitlab-ci.yml</div>
 {% highlight yaml %}
 image: php:7.0
 services:
@@ -198,7 +198,7 @@ test:app:
 {% endhighlight %}
 
 &nbsp;
-#### .env.gitlab-ci
+<div class="file-title">.env.gitlab-ci</div>
 {% highlight sh%}
 APP_ENV=testing
 APP_KEY=key

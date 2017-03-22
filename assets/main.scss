@@ -38,3 +38,13 @@ $on-laptop:        800px;
 // Import partials from the `minima` theme.
 @import "minima";
 
+
+.file-title {
+  margin-left: -30px;
+  margin-right: -30px;
+  color: rgba(251, 241, 199, 0.54);
+  background-color: lighten(#282828, 5%);
+  padding: 9px 45px 7px 45px;
+  text-align: right;
+  font-family: monospace;
+}

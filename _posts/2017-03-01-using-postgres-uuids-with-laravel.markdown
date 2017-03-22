@@ -12,7 +12,7 @@ The following is a small cheatsheet for the things you have to take care of
 
 ## Setting up the db
 The first thing you need is to activate the UUID extension in postgres. Simply create a new migration that looks like this:
-
+<div class="file-title">database/migrations/1900_01_01_000001_add_uuid_extension_to_postgresql.php</div>
 {% highlight php %}
 <?php
 use Illuminate\Support\Facades\Schema;
@@ -39,6 +39,7 @@ class AddUuidExtensionToPostgresql extends Migration
 Let's say you want to have a `users` table. You probably want your `id`s to be automatically generated. Most of the tutorials I have found rely on `beforeCreate` callbacks on the model, at the applications level. I think it is best if the database takes care of this.
 
 Unfortunately the nice `Schema` DSL doesn't provide a way to do this, so we need to use plain SQL for it.
+<div class="file-title">database/migrations/2017_03_01_000001_create_users.php</div>
 
 {% highlight php %}
 <?php
@@ -54,9 +55,9 @@ DB::statement('ALTER TABLE users ALTER COLUMN id SET DEFAULT uuid_generate_v4();
 ## Models
 Now let's create the corresponding `User` model.
 
+<div class="file-title">App/User.php</div>
 {% highlight php %}
 <?php
-
 namespace App;
 use Illuminate\Database\Eloquent\Model;
 class User extends Model
@@ -74,6 +75,7 @@ Second: in this example I am naming my primary key `id`, which is Eloquent's def
 
 Lastly, many comments online and tutorials indicate that the public attribute `$incrementing` should be set to `false`, arguing that UUIDs don't need to be autoincremented. As much sense as that might make it managed to broke my applications. **Disabling the incrementing property somehow nullifies the `id` attribute in newly created records**, as the following code highlights.
 
+<div class="file-title">App/User.php</div>
 {% highlight php %}
 <?php
 class User extends Model
