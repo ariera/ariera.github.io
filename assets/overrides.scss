@@ -3,35 +3,68 @@
 ---
 @charset "utf-8";
 
-h1, h2, h3, h4, h5, h6 {
-  margin-top: 70px;
+.wrapper{
+  border: 1px solid rgba(0,0,0,0.125);
+  background-color: white;
 }
 
+.highlight {
+  margin-left: -30px;
+  margin-right: -30px;
+}
+
+.post-header, .page-heading {
+  margin-top: 60px;
+}
 
 .post-content {
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 70px;
+  }
+
+  h1, h2, h3, h4 {
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    margin-left: -30px;
+    margin-right: -30px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
   h2 {
     font-size: 32px;
     code {
-      font-size: 32px;
+      font-size: 28px;
     }
   }
 
   h3 {
     font-size: 26px;
     code {
-      font-size: 26px;
+      font-size: 22px;
     }
   }
 
   h4 {
     font-size: 20px;
     code {
-      font-size: 20px;
+      font-size: 18px;
     }
   }
 }
 
-pre,
-code {
-  background-color: #f9f9ff;
+// pre,
+// code {
+//   background-color: #f9f9ff;
+// }
+
+.highlight {
+  pre,
+  code {
+    // background-color: #303030;
+  }
+}
+
+.highlighter-rouge {
+  background-color: #282828;
+  color: #b8bb26;
 }
