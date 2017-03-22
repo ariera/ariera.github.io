@@ -84,7 +84,7 @@ class User extends Model
 
 $user = new User;
 $user->save();
-$user->id; //=> null
+$user->id; /* => null */
 {% endhighlight %}
 
 ## Summary
