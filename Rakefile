@@ -3,6 +3,7 @@ require "pry"
 require 'active_support'
 require 'active_support/all'
 namespace :post do
+  desc 'Usage: rake post:new["My awesome title"]'
   task :new, [:title] do  |t, args|
     date = Date.today.strftime("%Y-%m-%d")
     file_name = [date, args[:title]].join("-").parameterize
