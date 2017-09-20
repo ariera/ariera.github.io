@@ -39,7 +39,7 @@ INSTALLED_APPS = [
 
 #### Configure your `models` and `admin`
 
-This will be your `./base/models.py`, highly inspired by the [original Django source code](https://github.com/django/django/blob/a96b981d84367fd41b1df40adf3ac9ca71a741dd/django/contrib/auth/models.py#L288).
+This will be your models, highly inspired by the [original Django source code](https://github.com/django/django/blob/a96b981d84367fd41b1df40adf3ac9ca71a741dd/django/contrib/auth/models.py#L288).
 
 <div class="file-title">./base/models.py</div>
 {% highlight python %}
@@ -114,7 +114,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 {% endhighlight %}
 
-This will be your `./base/admin.py`
+And here is the admin file, also highly inspired by the [original Django source code](https://github.com/django/django/blob/a96b981d84367fd41b1df40adf3ac9ca71a741dd/django/contrib/auth/admin.py#L42)
 <div class="file-title">./base/admin.py</div>
 {% highlight python %}
 from django import forms
@@ -205,7 +205,7 @@ admin.site.register(User, UserAdmin)
 #### Apply changes
 And lastly you need to generate your migrations and migrate
 
-{% highlight python %}
+{% highlight bash %}
 python manage.py makemigrations base
 python manage.py migrate
 python manage.py createsuperuser
