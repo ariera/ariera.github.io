@@ -1,14 +1,19 @@
 ---
 layout: post
-title:  "How to add a dev toolbar to a Django project"
+title:  "dev-toolbar a web developer's best friend!"
 date:   2017-09-20 18:05:28 +0200
+tags: django, python, webdev
 ---
 
-The **dev toolbar** is a simple concept we came up with many years ago. The idea is to provide developers with a toolbelt full of tricks hidden in the frontend. It is such an integral part of my workflow that it is usually the first thing I set up in any project.
+The **dev-toolbar** is a simple concept we came up with many years ago. The idea is to provide developers with a toolbelt full of tricks (shortcuts, toggles, login-as...) hidden in the frontend. It is such an integral part of my workflow that it is usually the first thing I set up in any project.
 
-In this entry we will see how I set it up in a Django web application. We will focus on the feature that everybody loves: the ability to login as any user in the database (great time saver). **We call it impersonate**, and this is how it looks like:
+In this entry we will see how to set it up in a Django web application. We will focus on **the feature that everybody loves**: the ability to login as any user in the database (great time saver). We call it **impersonate** , and this is how it looks like:
 
 ![developer toolbar]({{ site.url }}/assets/dev-toolbar.png)
+
+A simple select with all the users in your database. Click on one and you'll be logged in as him/her.
+
+Let's get on with it!
 
 ### 1. Create a dev app
 We will start by creating a new app that we will call `dev`. It will hold all of our impersonation logic, but is also a useful place to have to keep a style guide for developers, or some handy snippets to share accross the team, or maybe just to house a temporary experiment.
@@ -136,21 +141,21 @@ The template file contains a little bit of logic. Some CSS along with Javascript
   }
 </script>
 <div id="dev-toolbar" class="subtle" onmouseover="dev.showToolbar()">
-<small><a href="/dev">dev</a></small>
-<small><a href="/admin">admin</a></small>
+  <small><a href="/dev">dev</a></small>
+  <small><a href="/admin">admin</a></small>
 
-{% if users %}
-  <select id="dev-impersonate" onchange="dev.impersonate()">
-    {% for user in users %}
-       <option value="{% url 'dev:impersonate' user.id %}"
-           {% if user == current_user %}selected="selected"{% endif %}>
-           {{user.email}}
-       </option>
-    {% endfor %}
-  </select>
-{% endif %}
+  {% if users %}
+    <select id="dev-impersonate" onchange="dev.impersonate()">
+      {% for user in users %}
+         <option value="{% url 'dev:impersonate' user.id %}"
+             {% if user == current_user %}selected="selected"{% endif %}>
+             {{user.email}}
+         </option>
+      {% endfor %}
+    </select>
+  {% endif %}
 
-<button id="dev-close-toolbar" onclick="dev.closeToolbar()">X</button>
+  <button id="dev-close-toolbar" onclick="dev.closeToolbar()">X</button>
 </div>
 {% endif %}
 {% endraw %}
