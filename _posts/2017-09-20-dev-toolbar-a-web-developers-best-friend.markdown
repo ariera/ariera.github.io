@@ -178,7 +178,7 @@ Our feature is complete and ready to be used. Simply load it in any view and cal
 {% endraw %}
 
 ### 5. Show it in the admin panel
-We are going to override the default `admin/index.html` template and include our new `dev_toolbar` snippet. For that we need to create a generic `./templates` directory at the root of the project and add it to `TEMPLATES['DIRS']` in the settings of the project.
+We are going to override the default `admin/base.html` template and include our new `dev_toolbar` snippet. For that we need to create a generic `./templates` directory at the root of the project and add it to `TEMPLATES['DIRS']` in the settings of the project.
 
 <div class="file-title">./your_app/settings.py</div>
 {% highlight python %}
@@ -191,16 +191,16 @@ TEMPLATES = [
 ]
 {% endhighlight %}
 
-And now create a new file to override the default administration index tempalte.
+And now create a new file to override the default administration base tempalte.
 
-<div class="file-title">./templates/admin/index.html</div>
+<div class="file-title">./templates/admin/base.html</div>
 {% highlight html %}
 {% raw %}
-    <!-- ./templates/admin/index.html -->
-    {% extends "admin/index.html" %}
+    <!-- ./templates/admin/base.html -->
+    {% extends "admin/base.html" %}
     {% load dev_toolbar %}
 
-    {% block sidebar %}
+    {% block footer %}
         {{block.super}}
         {% dev_toolbar %}
     {% endblock %}
