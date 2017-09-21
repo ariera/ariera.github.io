@@ -130,7 +130,6 @@ The template file contains a little bit of logic. Some CSS along with Javascript
       toolbar.parentElement.removeChild(toolbar)
     },
     showToolbar: function showToolbar(){
-      console.debug("showToolbar")
       var toolbar = document.getElementById("dev-toolbar")
       toolbar.classList.remove("subtle");
     },
