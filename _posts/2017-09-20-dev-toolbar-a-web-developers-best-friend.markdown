@@ -84,7 +84,10 @@ We want to reuse our toolbar across many templates so we will extract it into it
 
 For that you need to create this directory: `./dev/templatetags` and an empty `__init__.py` file inside of it.
 
-Inside our templatetags folder we will create the following file, which acts like the view of our new `dev_toolbar` templatetag. Notice 2 things. First we are linking it to the template `dev/toolbar.html` that we will define later. And second we use `takes_context=True` to be able to access to the current user, in order to validate it is a super user before rendering our whole user database. This is redundant with the logic we defined above, but I think it's good to have a safety net when you're handling delicate data. Notice that we will pass the `current_user` aswell down to the template, so we can perform extra verifications from there.
+Inside our templatetags folder we will create the following file, which acts like the view of our new `dev_toolbar` templatetag. Notice 2 things:
+
+1. First we are linking it to the template `dev/toolbar.html` that we will define later.
+2. And second we use `takes_context=True` to be able to access to the current user. This will allow us to do some basic authorization (ie. only superusers are allowed to use this feature). This is redundant with the logic we defined before, but it's good to have a safety net when you're handling delicate data.
 
 <div class="file-title">./dev/templatetags/dev_toolbar.py</div>
 {% highlight python %}
@@ -105,7 +108,11 @@ def dev_toolbar(context):
   return {'users': users, 'current_user': current_user}
 {% endhighlight %}
 
-The template file contains a little bit of logic. Some CSS along with Javascript to make the bar more subtle. We will render a select box with all the users in the database and a javascript will take care of calling the impersonate action whenever we choose another user other than ourselves. Last, but not least, I usually include a small close button, it comes in handy sometimes when doing CSS work, you just want to get rid of the bar. Two more handy links to `dev` and `admin` areas are included.
+The template file contains its own css, javascript and html. Some simple positioning and styling and bit of css+js logic to make the bar more subtle.
+
+We will render a select box with all the users in the database and a javascript will take care of calling the impersonate action whenever we choose another user other than ourselves. Two more handy links to `/dev` and `/admin` areas are included.
+
+Last, but not least, I usually include a small close button, it comes in handy sometimes when doing CSS work, you just want to get rid of the bar.
 <div class="file-title">./dev/templates/dev/toolbar.html</div>
 {% highlight html %}
 {% raw %}
