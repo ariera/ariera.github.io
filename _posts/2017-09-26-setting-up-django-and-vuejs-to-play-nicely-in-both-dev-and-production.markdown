@@ -9,7 +9,9 @@ I recently started a new web project based on both Django and Vuejs. It took a g
 
 In this post we will cover the key points on **setting up a nice and solid development environment that is consisten with production and hence easy to deploy**. This is the solution that I found, there may be better alternatives (which I'd be happy to read) and it is utimately written with the intention of helping others as well as my future-self :)
 
-<h1 class="no-border">Introduction</h1>
+<h1 class="no-border">
+  <img src="{{ site.url }}/assets/django-vue-dev.png" alt="django webpack vue logos">
+</h1>
 <h2 class="mt-30">The problem</h2>
 Both Django and Vue offer scripts to run web servers to facilitate development, but does that mean that I need to be running both servers in parallel? And do I need to switch from one to another while developing? That sounds cumbersome! If you are building a full SPA with Vue as your only frontend, and Django as a simple API backend that might be okey, but I want something else.
 
