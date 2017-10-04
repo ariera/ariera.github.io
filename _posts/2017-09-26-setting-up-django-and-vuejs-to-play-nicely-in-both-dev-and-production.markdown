@@ -30,9 +30,10 @@ The solution I found is based around the django library `django-webpack-loader` 
 All you will need to do while developing is launch both local web servers and point your browser to the Django one :)
 
 _Versions i'm using:_
-* vue 2.4.2
-* django 1.11
+* Vue.js 2.4.2
+* Django 1.11
 * vue-cli 2.8.2
+* Python 3.6.1
 
 <h1 class="no-border">Setting up the dev environment</h1>
 <h2 class="mt-30">Creating the project</h2>
