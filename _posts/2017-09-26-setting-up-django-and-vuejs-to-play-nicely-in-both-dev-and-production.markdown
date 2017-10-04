@@ -337,9 +337,9 @@ Until then,
 * [http://owaislone.org/blog/webpack-plus-reactjs-and-django/](http://owaislone.org/blog/webpack-plus-reactjs-and-django/)
 
 
+<div style="display:none">
+  # Getting ready for production
+  https://docs.djangoproject.com/en/1.11/ref/templates/api/#writing-your-own-context-processors
+  https://git.embl.de/mainar/my.embo.org/compare/vue-bulma-bootstraping...django-with-vue?view=parallel
+</div>
 
-# Getting ready for production
-https://docs.djangoproject.com/en/1.11/ref/templates/api/#writing-your-own-context-processors
-
-
-https://git.embl.de/mainar/my.embo.org/compare/vue-bulma-bootstraping...django-with-vue?view=parallel
