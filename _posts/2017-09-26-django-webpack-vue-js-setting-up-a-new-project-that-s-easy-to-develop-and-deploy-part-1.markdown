@@ -2,7 +2,6 @@
 layout: post
 title:  "Django + webpack + Vue.js - setting up a new project that's easy to develop and deploy (part 1)"
 date:   2017-09-26 08:55:25 +0200
-categories: webpack django vue webdev
 ---
 
 I recently started a new web project based on both Django and Vuejs. It took a good deal of reading half-related and/or outdated posts, tons of documentation, and a good deal of trial and error to get it right.
