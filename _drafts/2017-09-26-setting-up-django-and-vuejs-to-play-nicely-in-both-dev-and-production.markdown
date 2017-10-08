@@ -7,15 +7,17 @@ categories: webpack django vue webdev
 
 I recently started a new web project based on both Django and Vuejs. It took a good deal of reading half-related and/or outdated posts, tons of documentation, and a good deal of trial and error to get it right.
 
-In this post we will cover the key points on **setting up a nice and solid development environment that is consisten with production and hence easy to deploy**. This is the solution that I found, there may be better alternatives (which I'd be happy to read) and it is utimately written with the intention of helping others as well as my future-self :)
+In this post we will cover the key points on **setting up a nice and solid development environment that is consisten with production and hence easy to deploy**. The specifics of how to deploy, final configuration touches and (automation) will be discussed in a future article.
+
+This is the solution that I found, there may be better alternatives (which I'd be happy to read) and it is utimately written with the intention of helping others as well as my future-self :)
 
 <h1 class="no-border">
   <img src="{{ site.url }}/assets/django-vue-dev.png" alt="django webpack vue logos">
 </h1>
 <h2 class="mt-30">The problem</h2>
-Both Django and Vue offer scripts to run web servers to facilitate development, but does that mean that I need to be running both servers in parallel? And do I need to switch from one to another while developing? That sounds cumbersome! If you are building a full SPA with Vue as your only frontend, and Django as a simple API backend that might be okey, but I want something else.
+Both Django and Vue offer local web servers to facilitate development, but that confused me in the beginning. Does that mean that I need to be running both servers in parallel? And do I need to switch from one to another while developing? That sounds cumbersome! If you are building a full SPA with Vue as your frontend, and Django as a simple API backend that might be okey, but I want something else.
 
-I want to remain flexible: some parts of my project will behave like an SPA, other parts will be rendered by Django, and some other will be a mixture (Django-rendered  with Vue components). I want to be able to use my webpack-compiled css in my Django templates, as well as other static assets.
+I want to remain flexible: **some parts of my project will behave like an SPA, other parts will be rendered by Django, and some other will be a mixture: Django-rendered with Vue components**. I want to be able to use my webpack-compiled css in my Django templates, as well as other static assets.
 
 <h2 class="mt-30">My goals</h2>
 
@@ -25,7 +27,7 @@ I want to remain flexible: some parts of my project will behave like an SPA, oth
 1. django backed pages should work without much ceremony
 
 <h2 class="mt-30">My solution</h2>
-The solution I found is based around the django library `django-webpack-loader` and the `webpack-bundle-tracker` webpack plugin. The django module will read a manifest file, and a webpack plugin take care of updating it. That way, webpack will compile all the assets and Django will be able to use them in your templates.
+The solution I found is based around the django library [`django-webpack-loader`](https://github.com/ezhome/django-webpack-loader) and the [`webpack-bundle-tracker`](https://github.com/ezhome/webpack-bundle-tracker) webpack plugin. The django module will read a manifest file, and a webpack plugin take care of updating it. That way, webpack will compile all the assets and Django will be able to use them in your templates.
 
 All you will need to do while developing is launch both local web servers and point your browser to the Django one :)
 
@@ -37,7 +39,7 @@ _Versions i'm using:_
 
 <h1 class="no-border">Setting up the dev environment</h1>
 <h2 class="mt-30">Creating the project</h2>
-I have used the vue-cli to create a new project based on the webpack template, and then inside the new directory holding my project I had created a new django project
+I have used the [vue-cli](https://github.com/vuejs/vue-cli) to create a new project based on the [webpack template](https://vuejs-templates.github.io/webpack/), it will do most of the configuration and setup for us. Then, inside the new directory holding my project, I had created a new django project:
 
 {% highlight bash %}
 vue init webpack my_project
@@ -46,7 +48,6 @@ django-admin startproject my_project .
 {% endhighlight %}
 
 Now install both libraries
-
 
 {% highlight bash %}
 yarn add webpack-bundle-tracker --dev
@@ -80,7 +81,7 @@ module.exports = {
 
 This part was one of the trickiest, there are several configuration options all with very similar names and they feel very confusing to new commers to the framework. I'll spend a little explaining what and why every option does.
 
-My goal here was to have in the end a directory named `./public` (at the root of the project) where all the assest will be stored, with no unnecesary subdirectories (ie. grouping all javascript inside a `js` dir would be okey, but theres no need for deeper levels). The final `public` folder would look like this
+My goal here was to have in the end a directory named `./public` (at the root of the project) where all the assest will be stored, with no unnecesary subdirectories (ie. grouping all javascript inside a `js` dir would be okey, but theres no need for deeper levels). The final `./public` folder would look like this
 
 ```
 - public/
