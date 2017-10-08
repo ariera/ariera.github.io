@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Setting up Django and VueJS to play nicely in both dev and production"
+title:  "Django + webpack + Vue.js - setting up a new project that's easy to develop and deploy (part 1)"
 date:   2017-09-26 08:55:25 +0200
 categories: webpack django vue webdev
 ---
@@ -313,6 +313,14 @@ new HtmlWebpackPlugin({
   // necessary to consistently work with multiple chunks via CommonsChunkPlugin
   chunksSortMode: 'dependency'
 }),
+{% endhighlight %}
+
+And last but not least lets add the following to your `.gitignore` file:
+
+{% highlight git %}
+webpack-stats.json
+public/
+dist/
 {% endhighlight %}
 
 # Conclusions:
