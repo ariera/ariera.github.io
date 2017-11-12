@@ -67,6 +67,7 @@ And configure webpack to use `BundleTracker`.
 
 {% highlight javascript %}
 // build/webpack.base.conf.js
+let BundleTracker = require('webpack-bundle-tracker')
 module.exports = {
   // ...
   plugins: [
@@ -179,13 +180,13 @@ Let's analyse this step by step.
 
 One final touch. I would like to have a place to put images, fonts, or generic statics assets that can be used from both worlds: Django tempaltes and Vue components. In other words, I want to have a `./static` directory at the root of the project where I could put (for example) my logo and be able to write this code:
 
-{% highlight html %}
+{% highlight html %}{% raw %}
 <!-- in a Django template -->
-<img src="{\% static 'logo.png' \%}">
+<img src="{% static 'logo.png' %}">
 
 <!-- in a Vue component -->
 <img src="static/logo.png">
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 The Django example already works thanks to the config above described (see `STATICFILES_DIRS`), but for Vue/Webpack to work you'd need to add an alias to the wbepack config, like this.
 
@@ -215,7 +216,7 @@ While in development we are only accessing Django's server, and proxying our ass
 // before
 var hotClient = require('webpack-hot-middleware/client?noInfo=true&reload=true')
 // after
-var hotClient = require('webpack-hot-middleware/client?noInfo=true&reload=true&path=http://localhost:8080/__ webpack_hmr')
+var hotClient = require('webpack-hot-middleware/client?noInfo=true&reload=true&path=http://localhost:8080/__webpack_hmr')
 {% endhighlight %}
 
 {% highlight javascript %}
@@ -233,26 +234,38 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
 
 We will define a Django template reusable by other parts of our application that will take care of including the webpack assets.
 
-{% highlight html %}
+{% highlight html %}{% raw %}
 <!-- ./templates/my_project/base.html -->
-{\% load render_bundle from webpack_loader \%}
+{% load render_bundle from webpack_loader %}
 <html>
   <body>
-    {\% block content \%}
-    {\% endblock \%}
-    {\% render_bundle 'app' \%}
+    {% block content %}
+    {% endblock %}
+    {% render_bundle 'app' %}
   </body>
 </html>
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 Now other parts of our project could just extend this template and benefit from having all the styles from css or javascript accessible. In fact, let's create a second template, extending this one, to serve as the root of our SPA:
 
-{% highlight html %}
+{% highlight html %}{% raw %}
 <!-- ./templates/my_project/spa.html -->
-{\% extends "my_project/base.html" \%}
-{\% block content \%}
+{% extends "my_project/base.html" %}
+{% block content %}
   <div id="app"></div>
-{\% endblock \%}
+{% endblock %}
+{% endraw %}{% endhighlight %}
+
+Notice that in order for this template to be detected by Django you need to add the following to your `settings.py`
+
+{% highlight python %}
+# ./my_project/settings.py
+TEMPLATES = [
+  {
+    'DIRS': [os.path.join(BASE_DIR, 'templates')],
+    # ...
+  }
+]
 {% endhighlight %}
 
 And in our `main.js` where we define the root component of our SPA, we will point to this `div#app`:
