@@ -4,6 +4,8 @@ title:  "Django + webpack + Vue.js - setting up a new project that's easy to dev
 date:   2017-09-26 08:55:25 +0200
 ---
 
+<strong><span class="warning">UPDATE:</span> I recently created a working project at [ariera/django-vue-template](https://github.com/ariera/django-vue-template) using the latest version of the vue-webpack template and bundling all the changes highlighted in this post in just this commit [8a5c552](https://github.com/ariera/django-vue-template/commit/8a5c552a20bb9ec7e5751adef3b5d2e26addbcf4)</strong>
+
 I recently started a new web project based on both Django and Vuejs. It took a good deal of reading half-related and/or outdated posts, tons of documentation, and a good deal of trial and error to get it right.
 
 In this post we will cover the key points on **setting up a nice and solid development environment that is consisten with production and hence easy to deploy**. The specifics of how to deploy, final configuration touches and (automation) will be discussed in a future article.
@@ -228,6 +230,23 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
 })
 {% endhighlight %}
 
+<div class="warning">UPDATE 2017.11.28</div>
+The official vue webpack template <a href="https://github.com/vuejs-templates/webpack/commit/aba0f9c7b7903a5371469ecbd80b6f7df93fe536">was updated around 2 weeks ago</a> to start using the official `webpack-dev-server`.
+
+In order to properly configure HMR after the update you simply need to add the following to the `build/webpack.dev.conf.js`:
+
+{% highlight javascript %}
+// build/webpack.dev.conf.js
+devServer: {
+  headers: {
+    "Access-Control-Allow-Origin":"\*"
+  },
+  // ...
+}
+{% endhighlight %}
+
+Thank you very much to <a href="https://forum.vuejs.org/t/dev-client-dev-server/21645">Emilien and LinusBorg for the feedback</a> on this :)
+
 
 ## The basic Django template
 
@@ -268,7 +287,7 @@ new Vue({
 
 The last step would be to define a new url route in our Django settings:
 {% highlight python %}
-# ./my_project/settings.py
+# ./my_project/urls.py
 from django.views.generic import TemplateView
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='my_project/spa.html'), name='home'),
@@ -279,9 +298,12 @@ urlpatterns = [
 And we can now open `http://localhost:8000` in our browser and enjoy our fully functional dev environment :)
 
 ## Clean unnecessary files and options
-Before we conclude let's do a little cleanup.
+<strong><span class="warning">UPDATE:</span> It is better ignore everything related to `HtmlWebpackPlugin` in this part, it was breakign the end-to-end tests.</strong>
 
-Remove the `index.html` file at the root of your project and stop using `HtmlWebpackPlugin` in development. Since Django will render the initial html and include any assets there we don't need `HtmlWebpackPlugin` to generate an initial html file for us.
+
+~~Before we conclude let's do a little cleanup.~~
+
+~~Remove the `index.html` file at the root of your project and stop using `HtmlWebpackPlugin` in development. Since Django will render the initial html and include any assets there we don't need `HtmlWebpackPlugin` to generate an initial html file for us.~~
 
 {% highlight javascript %}
 // build/webpack.dev.conf.js
@@ -293,7 +315,7 @@ new HtmlWebpackPlugin({
 }),
 {% endhighlight %}
 
-For the same reason we want to remove it from the production config, but we want to keep it in tests. Simply move this bit of conde from `build/webpack.prod.conf.js` to `build/webpack.test.conf.js`
+~~For the same reason we want to remove it from the production config, but we want to keep it in tests. Simply move this bit of conde from `build/webpack.prod.conf.js` to `build/webpack.test.conf.js`~~
 
 {% highlight javascript %}
 new HtmlWebpackPlugin({
