@@ -2,7 +2,7 @@
 To run in jekyll in development:
 
 ```
-bundle exec jekyll serve -wo --drafts
+bundle exec jekyll serve --force_polling --drafts
 ```
 
 To create a new entry:
