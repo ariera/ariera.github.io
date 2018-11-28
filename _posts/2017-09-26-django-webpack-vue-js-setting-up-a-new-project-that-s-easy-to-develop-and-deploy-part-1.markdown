@@ -4,7 +4,15 @@ title:  "Django + webpack + Vue.js - setting up a new project that's easy to dev
 date:   2017-09-26 08:55:25 +0200
 ---
 
+<strong><span class="warning">UPDATE 2018-11-12:</span> Rodrigo Smaniotto wrote an updated version and more complete than this article using Dajngo2 and Vue CLI3. I can only recommend checking it here: [https://medium.com/@rodrigosmaniotto/integrating-django-and-vuejs-with-vue-cli-3-and-webpack-loader-145c3b98501a](https://medium.com/@rodrigosmaniotto/integrating-django-and-vuejs-with-vue-cli-3-and-webpack-loader-145c3b98501a)
+
+<hr>
+<br>
+
 <strong><span class="warning">UPDATE:</span> I recently created a working project at [ariera/django-vue-template](https://github.com/ariera/django-vue-template) using the latest version of the vue-webpack template and bundling all the changes highlighted in this post in just this commit [8a5c552](https://github.com/ariera/django-vue-template/commit/8a5c552a20bb9ec7e5751adef3b5d2e26addbcf4).</strong> You may also be interested in checking a [vue project template that CharlesAracil](https://github.com/CharlesAracil/webpack-vue-django) created taking inspiration from this entry.
+
+<hr>
+<br>
 
 I recently started a new web project based on both Django and Vuejs. It took a good deal of reading half-related and/or outdated posts, tons of documentation, and a good deal of trial and error to get it right.
 
