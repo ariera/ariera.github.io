@@ -394,3 +394,4 @@ Until then,
   https://git.embl.de/mainar/my.embo.org/compare/vue-bulma-bootstraping...django-with-vue?view=parallel
 </div>
 
+{% include comments.html %}
