@@ -23,7 +23,7 @@ and add the following to `~/.ssh/config`
     # ~/.ssh/config
     Host *
         SendEnv LANG LC_*
-        ForwardAgent no
+        ForwardAgent Yes
 {% endhighlight %}
 
 
