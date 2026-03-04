@@ -13,8 +13,8 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Alejandro Riera Mainar
-email: info@ariera.net
+title: arm
+email: 
 description: > # this means to ignore newlines until "baseurl:"
   This is my personal blog, where I tend to put the new things I have learned.
   I like it because it helps me avoid the "but I already solved this once" problem.
